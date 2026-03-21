@@ -1,0 +1,7 @@
+aid: cognizant-technology
+url: https://raw.githubusercontent.com/api-evangelist/cognizant-technology/refs/heads/main/apis.yml
+modified: '2026-03-21'
+apis: []
+common:
+  - type: Website
+    url: https://www.cognizant-technology.com
