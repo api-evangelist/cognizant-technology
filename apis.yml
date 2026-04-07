@@ -1,7 +1,12 @@
 aid: cognizant-technology
-url: https://raw.githubusercontent.com/api-evangelist/cognizant-technology/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/cognizant-technology/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.cognizant-technology.com
+description: >-
+  Cognizant Technology Solutions is a multinational information technology services
+  and consulting company that provides digital, technology, consulting, and operations
+  services to clients worldwide.
