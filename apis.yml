@@ -10,7 +10,7 @@ tags:
   - Multi-Agent
   - Neuro AI
 type: Index
-x-type: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-03-21'
@@ -49,7 +49,7 @@ common:
     url: https://github.com/cognizant-ai-lab/neuro-san-studio
   - type: News
     url: https://news.cognizant.com/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.cognizant.com/us/en/privacy-notice
   - type: Terms of Use
     url: https://www.cognizant.com/us/en/terms-of-use
