@@ -29,6 +29,8 @@ description: >-
   engaged via consulting engagements rather than self-service APIs.
 apis: []
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/cognizant
   - type: Website
     url: https://www.cognizant.com/
   - type: AI Lab
