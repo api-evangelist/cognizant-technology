@@ -54,7 +54,7 @@ common:
     url: https://news.cognizant.com/
   - type: PrivacyPolicy
     url: https://www.cognizant.com/us/en/privacy-notice
-  - type: Terms of Use
+  - type: TermsOfService
     url: https://www.cognizant.com/us/en/terms-of-use
 maintainers:
   - FN: Kin Lane
