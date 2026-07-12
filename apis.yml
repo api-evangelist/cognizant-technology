@@ -30,6 +30,8 @@ description: >-
   engaged via consulting engagements rather than self-service APIs.
 apis: []
 common:
+  - type: DomainSecurity
+    url: security/cognizant-technology-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/cognizant
   - type: Website
@@ -56,6 +58,8 @@ common:
     url: https://www.cognizant.com/us/en/privacy-notice
   - type: TermsOfService
     url: https://www.cognizant.com/us/en/terms-of-use
+  - url: https://www.cognizant.com/us/en/insights/insights-blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
