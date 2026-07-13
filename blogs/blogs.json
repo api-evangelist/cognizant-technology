@@ -1,0 +1,14 @@
+{
+  "repo": "cognizant-technology",
+  "feeds": [
+    {
+      "source": "https://www.cognizant.com/us/en/insights/insights-blog",
+      "feed_url": "https://www.cognizant.com/us/en/insights/insights-blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 11
+}
