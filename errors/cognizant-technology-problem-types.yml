@@ -1,0 +1,74 @@
+generated: '2026-09-05'
+method: derived
+source: openapi/cognizant-technology-neuro-san-agent-service.json
+note: >-
+  Derived from the OpenAPI error responses. This is a small and unusually uniform catalog:
+  every one of the four operations declares exactly two responses — 200 OK and a single
+  `default` error response — and every default response returns the same schema.
+  IMPORTANT SHAPE FINDING: the error envelope is NOT RFC 9457 problem+json. It is
+  `google.rpc.Status` (code / message / details[]) serialized as application/json, which is
+  what the grpc-gateway-style OpenAPI generation from the .proto files produces. An agent
+  written against RFC 9457 will not find `type`, `title`, `status`, `detail` or `instance`
+  fields here. Recorded as observed, not corrected.
+  The spec enumerates NO specific HTTP status codes at all — no 400, 401, 403, 404, 429 or
+  5xx are declared — so the concrete failure taxonomy below cannot be derived from the
+  contract, and none is invented. The `code` field carries a google.rpc.Code enum value, but
+  the spec does not enumerate which codes each operation can return.
+format: google-rpc-status
+rfc9457: false
+content_type: application/json
+envelope:
+  schema: Status
+  fields:
+  - name: code
+    type: integer
+    format: int32
+    description: >-
+      The status code, which should be an enum value of google.rpc.Code. The spec does not
+      enumerate which values are reachable per operation.
+  - name: message
+    type: string
+    description: >-
+      A developer-facing error message, which should be in English. Per the schema
+      description, user-facing messages should be localized and carried in `details` or
+      localized by the client.
+  - name: details
+    type: array
+    items: GoogleProtobufAny
+    description: >-
+      A list of messages carrying error details. Each entry is an arbitrary serialized
+      message identified by an `@type` string, so the detail payload is not statically typed
+      in the contract.
+problem_types:
+- id: default
+  http_status: null
+  http_status_note: >-
+    The contract declares this response under the `default` key with no status code attached,
+    so the HTTP status an agent will actually receive is undeclared. This is a real gap in the
+    contract, recorded rather than filled in.
+  schema: Status
+  applies_to:
+  - ConciergeService_List
+  - AgentService_Connectivity
+  - AgentService_Function
+  - AgentService_StreamingChat
+  title: Default error response
+  description: >-
+    The single error response every operation declares. Carries a google.rpc.Status body.
+  remediation: null
+  remediation_note: >-
+    No remediation guidance is derivable — the provider publishes no error reference page for
+    the HTTP/MCP surface, and the spec attaches no descriptions to individual failure modes.
+coverage:
+  operations: 4
+  operations_with_error_responses: 4
+  distinct_error_responses: 1
+  declared_4xx: 0
+  declared_5xx: 0
+docs_error_reference: null
+docs_error_reference_note: >-
+  Searched the neuro-san repository docs/ directory and README for an error-code reference;
+  none is published. The framework surfaces one documented application-level error signal
+  outside the contract — an API-key validation check (neuro_san/internals/run_context/
+  langchain/util/api_key_error_check.py) that reports a missing or invalid LLM-provider key —
+  and the MCP tools/call response carries an `isError` boolean alongside its content blocks.

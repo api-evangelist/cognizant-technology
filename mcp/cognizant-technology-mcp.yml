@@ -1,0 +1,74 @@
+generated: '2026-09-05'
+method: searched
+source: https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/mcp_service.md
+name: Neuro SAN MCP service
+status: published
+note: >-
+  Cognizant AI Lab ships a real, documented MCP server as part of the neuro-san package —
+  "Every Neuro SAN server can be an MCP Server" (neuro-san README). This is NOT a derived
+  candidate: the provider wrote the MCP service, documents its JSON-RPC methods with worked
+  curl examples, and validates against a vendored copy of the MCP schema
+  (neuro_san/service/mcp/validation/mcp-schema-2025-06-18.json).
+  What Cognizant does NOT operate is a hosted endpoint. There is no vendor-run URL an agent
+  can POST to today; the operator installs neuro-san and runs the server themselves, at which
+  point the MCP service listens on their own host.
+deployment:
+  mode: local-stdio
+  install: pip install neuro-san
+  package: https://pypi.org/project/neuro-san/
+  auth: unknown
+  verified: searched
+  note: >-
+    MODE CAVEAT — read this before treating the value literally. The pipeline's `mode`
+    enum has no value for "self-hosted HTTP server", and `local-stdio` is the closest
+    honest fit because it carries the property that matters: a human must install and run
+    the server on a machine before any agent can reach it. The transport is NOT stdio.
+    Neuro SAN implements MCP protocol version 2025-06-18 over JSON-RPC 2.0 on plain HTTP
+    POST; streaming HTTP transport is deliberately not used and the response is always a
+    single JSON-RPC payload, which the docs note removes the need for client-server
+    sessions and makes the deployment horizontally scalable.
+    `mode: remote` would be wrong and expensive here — it would assert Cognizant operates
+    an endpoint an agent can call right now, and they do not.
+  transport: http-json-rpc
+  protocol_version: '2025-06-18'
+  documented_local_endpoint: http://localhost:8080/mcp
+  documented_local_endpoint_note: >-
+    Taken verbatim from the provider's own curl examples in docs/mcp_service.md. This is the
+    operator's own loopback address after they start the server — it is a documentation
+    default, NOT a Cognizant-operated endpoint, and must never be promoted to `endpoint:`.
+enablement:
+  - flag: --mcp_enable=true
+    env: AGENT_MCP_ENABLE=true
+    effect: server provides both the MCP service and the native neuro-san API simultaneously
+  - flag: --mcp_only=true
+    env: AGENT_MCP_ONLY=true
+    effect: server provides only the MCP endpoint; the native neuro-san API is disabled
+methods_documented:
+- initialize
+- notifications/initialized
+- tools/list
+- tools/call
+tools:
+  model: dynamic
+  note: >-
+    The tool set is not a fixed list Cognizant publishes — it is derived at runtime from the
+    operator's agent manifest. In MCP terms each PUBLIC neuro-san agent network is exposed as
+    one tool, whose name is the network name and whose description is the network's function
+    description. A chat request to an agent network becomes a tools/call. The provider states
+    the tool inputSchema is "replicated from neuro-san OpenAPI specification", which is why the
+    crosswalk in cognizant-technology-tool-crosswalk.yml can bind it to a real operationId.
+  example_from_docs:
+  - name: hello_world
+    description: >-
+      I can help you to make a terse announcement. Tell me what your target audience is, and
+      what sentiment you would like to relate.
+    input_schema_summary: 'object with required string property `input` (text input for chat request)'
+    note: >-
+      Verbatim from the provider's documented tools/list response. It is the example agent
+      network shipped in the neuro-san repo registries, not a catalog of Cognizant tools.
+probe:
+  attempted: false
+  reason: >-
+    There is no vendor-hosted MCP endpoint to POST tools/list against. Probing an arbitrary
+    third party's self-hosted neuro-san deployment would be probing someone else's server,
+    not Cognizant's, so no live tools/list was attempted.

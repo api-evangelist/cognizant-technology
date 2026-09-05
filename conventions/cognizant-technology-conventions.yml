@@ -1,0 +1,139 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json +
+  grpc/cognizant-technology-agent.proto +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/README.md +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/clients.md
+note: >-
+  Cross-cutting runtime semantics for the Neuro SAN agent service. Derived from the contract
+  and the provider's own docs. Where a convention does not exist, that is recorded as an
+  absence rather than left blank — a self-hosted agent framework legitimately lacks several
+  of the semantics a hosted commercial API would carry.
+auth_style:
+  summary: none declared in the contract; see authentication/cognizant-technology-authentication.yml
+  cross_reference: authentication/cognizant-technology-authentication.yml
+versioning:
+  in_path: true
+  scheme: single fixed path segment
+  detail: >-
+    Every operation is under /api/v1/. There is no version negotiation header and no second
+    version has ever been published. The document's own info.version is "0.0.1", which is a
+    generator default and does NOT track the neuro-san release (0.7.0 at time of writing) —
+    an agent must not read API currency from it.
+  package_versioning: >-
+    The real versioning signal is the PyPI package version, which follows semver-shaped
+    0.MAJOR.MINOR and has shipped 149 releases. See changelog/cognizant-technology-changelog.yml.
+  proto_versioning: >-
+    The .proto go_package options pin a /v1 path segment
+    (dev.cognizant_ai/neuro_san/api/grpc/agent/v1), consistent with the REST /api/v1.
+idempotency:
+  coverage: none
+  supported: false
+  header: null
+  scope: []
+  retention: null
+  detail: >-
+    No replay-protection mechanism exists. There is no Idempotency-Key header, no request-id
+    de-duplication, and no documented at-most-once guarantee. The single mutating-shaped
+    operation, AgentService_StreamingChat, is a conversational RPC: calling it twice starts
+    two conversations and will bill the operator's LLM provider twice. An agent that retries a
+    timed-out streaming_chat has no way to discover whether the first call landed.
+    Recorded as `none` because nothing in the contract or docs provides replay protection —
+    not because the surface is read-only.
+reversibility:
+  grade: na
+  state: na
+  detail: >-
+    Assessed and found not applicable, with the reasoning recorded rather than assumed. The
+    four operations are three GETs (list, connectivity, function) and one POST
+    (streaming_chat). The POST is a conversational RPC that returns a message stream; it
+    creates no addressable, retrievable resource on the server, and the API exposes no
+    entity to cancel, refund, void, delete or restore. There is consequently no reversal
+    operation to name and no window to state, and none is invented here.
+  caveat: >-
+    One real caveat an agent author should know: streaming_chat is not free of consequence
+    even though it is not reversible in the resource sense. Agent networks call CodedTools,
+    which the provider documents as able to "effectuate change via a web API" — so a chat turn
+    CAN produce irreversible side effects in third-party systems. Those effects belong to the
+    operator's agent network, not to this contract, and neuro-san neither tracks nor reverses
+    them.
+  reversal_operations: []
+  window: null
+dry_run_mode:
+  supported: false
+  detail: >-
+    No dry-run, preview or validate-only parameter exists on any operation. The provider does
+    ship data-driven test infrastructure for agent networks (docs/tests.md, test-case HOCON
+    reference, and an Assessor app that classifies agent failure modes), but that is an
+    offline development harness, not a runtime rehearsal mode on the API.
+pagination:
+  supported: false
+  detail: >-
+    ConciergeService_List returns the full agents array with no limit, offset, cursor or page
+    parameter, and no pagination fields in ConciergeResponse. Agent manifests are expected to
+    be small.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+response_filtering:
+  supported: true
+  mechanism: ChatFilter
+  detail: >-
+    Not field filtering but STREAM filtering — chat_filter.chat_filter_type accepts MINIMAL or
+    MAXIMAL (or UNKNOWN) to control which message types get streamed back from
+    StreamingChat. The closest thing this API has to a projection parameter.
+metadata:
+  supported: true
+  mechanism: sly_data
+  detail: >-
+    An optional free-form map on ChatRequest, deliberately kept out of the LLM chat stream.
+    Keys may be referenced in the stream; values are passed programmatically to tools. Also
+    the documented carrier for client-supplied API keys, session ids and usernames.
+  secondary: >-
+    AgentInfo.tags carries optional grouping metadata on listed agent networks.
+request_id_tracing:
+  header: null
+  supported_in_body: true
+  mechanism: Origin
+  detail: >-
+    No request-id header is defined. Tracing is done in-band instead: every ChatMessage
+    carries an origin[] array of Origin objects (tool name + 0-based instantiation_index),
+    which lets a client reconstruct the exact path a message took through the agent network,
+    including repeated invocations of the same tool by different paths.
+  observability: >-
+    The README states out-of-the-box support for observability/tracing feeds to LangSmith,
+    Langfuse, Arize Phoenix and HoneyHive — operator-configured, not exposed on the API.
+continuation:
+  mechanism: chat_context
+  detail: >-
+    The API's continuation token. The last AGENT_FRAMEWORK message before the stream closes
+    carries a populated chat_context; the client copies it whole-cloth into the chat_context
+    of the next StreamingChat request to continue the conversation. This is stated explicitly
+    in agent.proto and is the single most important convention for a client to implement
+    correctly.
+streaming:
+  supported: true
+  detail: >-
+    StreamingChat is a server-streaming RPC. For HTTP clients the proto guarantees each
+    response is on a single line and never broken across lines, so a client can parse the
+    stream line by line. The answer to any query is in the LAST streamed AGENT_FRAMEWORK
+    message — not the first, and not necessarily the last message overall.
+  mcp_divergence: >-
+    The MCP projection deliberately does not stream: it returns a single JSON-RPC payload.
+error_envelope:
+  shape: google.rpc.Status
+  rfc9457: false
+  cross_reference: errors/cognizant-technology-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  detail: >-
+    No rate-limit response headers are defined and no 429 is declared. See
+    rate-limits/cognizant-technology-rate-limits.yml.
+content_negotiation:
+  request: application/json
+  response: application/json
+  binary: >-
+    Non-text media rides inside the JSON body as MimeData (mime_type + base64 mime_bytes)
+    rather than as a separate content type.

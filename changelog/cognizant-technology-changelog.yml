@@ -1,0 +1,87 @@
+generated: '2026-09-05'
+method: searched
+source: https://github.com/cognizant-ai-lab/neuro-san/releases
+docs: https://github.com/cognizant-ai-lab/neuro-san/releases
+note: >-
+  Cognizant AI Lab publishes dated, per-release change notes as GitHub Releases on the
+  neuro-san repository. There is no CHANGELOG.md in the repository (probed, 404) and no
+  changelog page on cognizant.com — the Releases feed is the changelog.
+  Entries below are the ten most recent, read from the repository's releases Atom feed on
+  2026-09-05. Highlights are drawn verbatim from the provider's own notes; where the notes
+  are a bare list of merged pull requests, that is what is recorded, and no editorial
+  summary is invented.
+scheme: semver-shaped (0.MAJOR.MINOR)
+current_version: 0.7.0
+current_version_date: '2026-09-03'
+release_count_total: 149
+format: github-releases
+machine_readable_feed: https://github.com/cognizant-ai-lab/neuro-san/releases.atom
+breaking_change_labeling:
+  present: false
+  detail: >-
+    Notes are auto-generated "What's Changed" PR lists. Only 0.7.0 carries a hand-written
+    "Important" callout. There is no breaking/additive labeling a machine can filter on.
+entries:
+- version: 0.7.0
+  date: '2026-09-03'
+  breaking: unclear
+  highlights:
+  - >-
+    Important callout — "Requires Python 3.12 or above. That was already indirectly the case
+    since 0.6.84." Formalizes an existing floor rather than introducing a new one.
+  - Make neuro-san formally require Python 3.12 or above (#1302)
+  - Run unit tests on Python 3.12, 3.13 and 3.14 (#1304)
+  - Add Claude Fable 5.1 to the supported LLM set (#1297)
+  - Accept an LLM endpoint base URL without /v1 in the record/playback proxy (#1296)
+  - Capture root cause of HTTP load-test failures (#1300)
+  - Add a flag to allow prompt caching in load test (#1295)
+- version: 0.6.98
+  date: '2026-08-26'
+  breaking: false
+  highlights:
+  - Use the shared full-text projection at both capture points (#1285)
+  - Run EventInitiator in only one of the neuro-san service instances (#1289)
+- version: 0.6.97
+  date: '2026-08-24'
+  breaking: false
+  highlights:
+  - Unify responses handling and refactor tests (#1278)
+  - Add a ContentUtils policy class and block-content test infrastructure (#1276)
+  - Flatten list content to full text in the wire converter (#1281)
+  - Fix duplicate descendant journaling events (#1259)
+  - Re-enable the Ollama nightly test case (#1284)
+- version: 0.6.96
+  date: '2026-08-21'
+  breaking: false
+  highlights:
+  - Add a record/playback LLM proxy for load and regression testing (#1261)
+  - Add instance id to resources snapshot data (#1274)
+  - Several transpilation-related changes (#1270, #1273, #1275)
+- version: 0.6.95
+  date: '2026-08-19'
+  breaking: unclear
+- version: 0.6.94
+  date: '2026-08-14'
+  breaking: unclear
+- version: 0.6.93
+  date: '2026-08-14'
+  breaking: unclear
+- version: 0.6.92
+  date: '2026-08-11'
+  breaking: unclear
+- version: 0.6.91
+  date: '2026-08-08'
+  breaking: unclear
+- version: 0.6.90
+  date: '2026-08-06'
+  breaking: unclear
+entries_note: >-
+  Versions 0.6.90 through 0.6.95 carry release notes in the feed (2,000-8,400 characters each)
+  but were not transcribed here; the window above is deliberately recent. Date and version are
+  recorded for all ten so the cadence is measurable, and `breaking: unclear` states honestly
+  that the notes were not read closely enough to rule a breaking change in or out.
+related_feeds:
+- name: nsflow releases
+  url: https://github.com/cognizant-ai-lab/nsflow/releases
+- name: neuro-san-studio releases
+  url: https://github.com/cognizant-ai-lab/neuro-san-studio/releases

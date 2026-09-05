@@ -1,0 +1,38 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json +
+  https://github.com/cognizant-ai-lab/neuro-san (README, docs/)
+note: >-
+  No rate limits are published, and the reason is structural rather than an omission: neuro-san
+  is self-hosted software, so there is no Cognizant-operated gateway to enforce a quota
+  against. Whatever limits an agent encounters are set by the operator's own deployment and by
+  the downstream LLM provider whose key the operator supplies.
+  Recorded as limit_count: 0 per the honest-zero rule, with the checks that were run.
+limit_count: 0
+limits: []
+response_headers: []
+response_headers_note: >-
+  Checked and absent. The contract defines no X-RateLimit-*, RateLimit-* or Retry-After
+  response header on any operation, so a client has no runtime signal to back off on.
+exhaustion_status_code: null
+exhaustion_status_code_note: >-
+  No 429 is declared. The contract declares only 200 and a single untyped `default` error
+  response per operation, so an agent cannot distinguish throttling from any other failure
+  without reading the google.rpc.Status code out of the body.
+documented: false
+checked:
+- source: published OpenAPI
+  result: no rate-limit parameters, headers or 429 responses
+- source: neuro-san README and docs/ directory
+  result: no rate-limit, quota or throttling documentation
+- source: docs/mcp_service.md
+  result: no rate limiting described on the MCP endpoint
+upstream_limits:
+  note: >-
+    The binding limit in practice is the LLM provider's, not Cognizant's. The framework
+    documents fallback LLM specifications "for when your fave goes down", which is the closest
+    thing it offers to a throttling or outage strategy — a failover, not a backoff.
+operator_note: >-
+  An agent integrating with a specific neuro-san deployment should ask that deployment's
+  operator for limits. None can be inferred from the contract.

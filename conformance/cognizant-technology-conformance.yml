@@ -1,0 +1,126 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json + grpc/*.proto +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/mcp_service.md
+note: >-
+  Standards this contract declares about itself, each with evidence pointing at the exact
+  location in the artifact that carries it. Reward-only: standards the provider does not
+  claim are recorded as conforms:false with what was checked, never as a penalty, and nothing
+  is asserted that the artifacts do not show.
+conformance:
+- id: mcp
+  name: Model Context Protocol
+  version: '2025-06-18'
+  conforms: true
+  evidence: >-
+    docs/mcp_service.md states "Neuro-san implements MCP protocol version 2025-06-18 by
+    JSON-RPC 2.0 HTTP transport", the documented requests carry an explicit
+    MCP-Protocol-Version: 2025-06-18 header, and the repository vendors the protocol schema at
+    neuro_san/service/mcp/validation/mcp-schema-2025-06-18.json for validation.
+  evidence_url: https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/mcp_service.md
+  note: >-
+    This is the domain-standard signature for an agent-orchestration framework, and it is
+    declared by the implementation rather than claimed on a marketing page — the server
+    validates against a vendored copy of the spec schema.
+- id: jsonrpc-2.0
+  name: JSON-RPC 2.0
+  conforms: true
+  evidence: >-
+    Every documented MCP request and response body carries "jsonrpc":"2.0" with id and method
+    or result members, per docs/mcp_service.md.
+  evidence_url: https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/mcp_service.md
+- id: openapi-3.0.3
+  name: OpenAPI Specification
+  version: 3.0.3
+  conforms: true
+  evidence: >-
+    openapi/cognizant-technology-neuro-san-agent-service.json declares "openapi": "3.0.3" with
+    4 paths, 16 component schemas and 2 tags. Served live by a running server at
+    GET /api/v1/docs.
+  evidence_url: openapi/cognizant-technology-neuro-san-agent-service.json
+- id: protobuf-proto3
+  name: Protocol Buffers (proto3)
+  conforms: true
+  evidence: >-
+    All four .proto files declare syntax = "proto3" under package
+    dev.cognizant_ai.neuro_san.api.grpc.*, defining 2 services and 4 RPCs.
+  evidence_url: grpc/cognizant-technology-agent.proto
+- id: grpc
+  name: gRPC
+  conforms: true
+  evidence: >-
+    AgentService (Function, StreamingChat, Connectivity) and ConciergeService (List) are
+    declared as gRPC services; StreamingChat is a server-streaming RPC
+    (returns stream ChatResponse).
+  evidence_url: grpc/cognizant-technology-agent.proto
+- id: google-api-http
+  name: Google API HTTP annotations (google.api.http)
+  conforms: true
+  evidence: >-
+    Each RPC carries an option (google.api.http) binding it to a REST path — this is the
+    mechanism that produces the REST projection from the gRPC contract, e.g.
+    get "/api/v1/{agent_name}/function" on AgentService.Function.
+  evidence_url: grpc/cognizant-technology-agent.proto
+- id: google-rpc-status
+  name: google.rpc.Status error model
+  conforms: true
+  evidence: >-
+    The default error response on all four operations returns the Status schema
+    (code / message / details[] of google.protobuf.Any), the standard gRPC logical error model.
+  evidence_url: errors/cognizant-technology-problem-types.yml
+- id: rfc9457
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    Checked and absent. No application/problem+json media type appears in the contract and the
+    error envelope is google.rpc.Status, which carries none of the RFC 9457 members.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    Checked and absent. The published OpenAPI declares no components.securitySchemes and no
+    operation carries a security requirement.
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: >-
+    Checked and absent. /.well-known/openid-configuration returned 404 on cognizant.com and
+    www.cognizant.com.
+- id: pagination
+  name: Collection pagination
+  conforms: false
+  evidence: >-
+    Checked and absent. ConciergeService_List declares no limit, offset, cursor or page
+    parameter, and ConciergeResponse carries no pagination fields.
+- id: idempotency
+  name: Idempotent request replay protection
+  conforms: false
+  evidence: >-
+    Checked and absent. No Idempotency-Key header or equivalent mechanism appears in the
+    contract or docs. See conventions/cognizant-technology-conventions.yml (coverage: none).
+- id: apache-2.0
+  name: Apache License 2.0
+  conforms: true
+  evidence: >-
+    Declared as license_expression Apache-2.0 in the neuro-san PyPI metadata and repeated as a
+    copyright header on every .proto and script in the repository ("Copyright 2023-2026
+    Cognizant Technology Solutions Corp").
+  evidence_url: https://pypi.org/pypi/neuro-san/json
+domain_standard:
+  market: agent orchestration / multi-agent frameworks
+  standard: Model Context Protocol 2025-06-18
+  declared_in_contract: true
+  detail: >-
+    An agent that already speaks MCP can call a neuro-san deployment with no bespoke
+    connector: every public agent network is exposed as an MCP tool with an inputSchema the
+    provider states is replicated from the OpenAPI. This is the market's emerging
+    interoperability standard and the contract implements it rather than merely claiming it.
+compliance_certifications: []
+compliance_certifications_note: >-
+  No trust center, SOC 2, ISO 27001, PCI, HIPAA or FedRAMP attestation was found on a public
+  Cognizant page during this pass. Probed www.cognizant.com/us/en/trust-center (404),
+  /us/en/security (404) and /.well-known/security.txt (404). Cognizant is a large regulated
+  IT services firm and such attestations very likely exist behind client engagement or in
+  investor material; nothing is asserted here that was not fetched. No Compliance pointer is
+  emitted.

@@ -1,0 +1,93 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/SECURITY.md +
+  https://github.com/cognizant-ai-lab/neuro-san/releases +
+  https://pypi.org/pypi/neuro-san/json + live probes 2026-09-05
+note: >-
+  Lifecycle posture for the Neuro SAN agent service. The provider ships dated release notes
+  and a stated version-support rule, but no deprecation policy, no SLA and no live status
+  page. Each is recorded with what was actually checked.
+versioning:
+  api_path_version: v1
+  api_versions_published: 1
+  package_scheme: semver-shaped (0.MAJOR.MINOR)
+  current_package_version: 0.7.0
+  current_package_released: '2026-09-03'
+  release_count: 149
+  first_release_observed: null
+  cadence: >-
+    Very high. Fifteen releases in the six weeks to 2026-09-03 (0.6.85 on 2026-07-28 through
+    0.7.0 on 2026-09-03) — roughly a release every two to three days. This is an actively
+    developed project, not a parked one.
+  spec_version_warning: >-
+    The OpenAPI document's info.version is "0.0.1" and has not tracked the package since the
+    project began. Do not read API currency from the contract.
+version_support_policy:
+  published: true
+  source: https://github.com/cognizant-ai-lab/neuro-san/blob/main/SECURITY.md
+  rule: only the latest release is supported; every version below latest is marked unsupported
+  detail: >-
+    Stated as a two-row supported-versions table in SECURITY.md. It is a real published policy,
+    but a blunt one: there is no LTS line, no support window in months, and no notice period,
+    so an operator pinning a version has no stated horizon.
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  detail: >-
+    No deprecation policy, no notice period, and no use of RFC 8594 Sunset or Deprecation
+    response headers. Searched the repository docs/ directory, README and SECURITY.md.
+  deprecated_operations: []
+  deprecated_operations_note: >-
+    Derived from the contract: no operation, parameter or schema in the published OpenAPI
+    carries `deprecated: true`.
+breaking_change_signals:
+  observed:
+  - version: 0.7.0
+    date: '2026-09-03'
+    signal: >-
+      Release notes lead with an "Important" block raising the floor to Python 3.12 or above.
+      The notes state this was already indirectly true since 0.6.84, so it formalizes an
+      existing constraint rather than introducing a new break — recorded as the provider
+      described it.
+  note: >-
+    Release notes are per-PR change lists and do not carry explicit breaking-change labels, so
+    breaking changes must be inferred by a reader rather than filtered by a machine.
+status_page:
+  published: false
+  probed:
+  - url: https://status.cognizant.com
+    status: 0
+    detail: host does not resolve
+  - url: https://cognizant.statuspage.io
+    status: 200
+    detail: >-
+      DEAD SURFACE, not a status page. The request 200s but redirects to
+      https://cognizant.statuspage.io/inactive and the page title is
+      "Cognizant Status - Page Inactive". Cognizant reserved and at some point ran an Atlassian
+      Statuspage, then deactivated it. A control probe on a nonexistent subdomain
+      (cognizant-nonexistent-zzz9.statuspage.io) instead lands on Atlassian's marketing site,
+      confirming the /inactive page is specific to Cognizant's own deactivated tenant.
+      No StatusPage pointer is emitted: the provider does not currently operate one.
+  - url: https://www.cognizant.com/us/en/status
+    status: 404
+sla:
+  published: false
+  detail: >-
+    No uptime or support SLA is published for the open-source framework. Cognizant's platform
+    engagements are contractual and any SLA lives in a client contract, not on the public web.
+support_channels:
+- type: security
+  channel: labgithub@cognizant.com
+  scope: cognizant-ai-lab repositories
+- type: security
+  channel: https://hackerone.com/cognizant
+  scope: corporate
+- type: issues
+  channel: https://github.com/cognizant-ai-lab/neuro-san/issues
+  scope: neuro-san framework
+end_of_life:
+  announced: false
+  detail: No end-of-life announcement for neuro-san or any Neuro AI platform component.

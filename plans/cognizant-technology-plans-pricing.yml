@@ -1,0 +1,48 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://pypi.org/pypi/neuro-san/json + https://www.cognizant.com/us/en/ai-lab/neuro-san +
+  https://www.cognizant.com/us/en/services/cognizant-platforms
+note: >-
+  Two different commercial models sit under one company here, and conflating them would
+  misrepresent both.
+  (1) The API surface this repository profiles — the Neuro SAN framework and its agent service
+  — is FREE AND OPEN SOURCE under Apache-2.0. There is no metered API, no key to buy, no
+  quota and no tier, because Cognizant does not host it: the operator runs it on their own
+  infrastructure and pays their own LLM provider directly. The framework's own BYOK feature
+  exists precisely so "your deployments do not have to shoulder everyone else's token costs".
+  (2) The Cognizant Neuro AI platform family and the consulting engagements around it are sold
+  through enterprise sales with no published price. No pricing page, tier table or rate card
+  was found on cognizant.com.
+  Recorded as plan_count: 0 with the reason stated, per the pipeline's honest-zero rule.
+plan_count: 0
+pricing_page: null
+pricing_page_note: >-
+  No pricing page exists for the API surface. Searched cognizant.com's llms.txt index
+  (80,849 bytes, 420 lines covering Home, About, Case Studies, Insights, Glossary, Industries,
+  Services, General, Events, Reports, Campaigns, Recognitions and AI Lab) — it lists no
+  pricing, plans or rate-card page anywhere on the site.
+model: open-source-plus-enterprise-services
+plans: []
+open_source:
+  license: Apache-2.0
+  cost: free
+  package: https://pypi.org/project/neuro-san/
+  detail: >-
+    The framework, the gRPC contracts, the OpenAPI document, the MCP service and the CLI are
+    all shipped under Apache-2.0 at no cost.
+cost_of_operation:
+  note: >-
+    The real cost of running this API is not Cognizant's to bill — it is LLM inference. The
+    operator supplies OPENAI_API_KEY (or another provider's) and pays that provider. The
+    framework's cost-relevant features are BYOK for client-supplied keys, per-agent LLM
+    selection so each agent can use the right model for its cost/latency/context tradeoff,
+    and fallback LLM specifications.
+enterprise:
+  available: true
+  channel: contact-sales
+  detail: >-
+    Neuro AI Decisioning, Neuro AI Enterprise Core, Neuro AI Engineering and Neuro AI for IT
+    Operations are delivered through consulting engagements. No self-service signup and no
+    published price.
+  url: https://www.cognizant.com/us/en/services/cognizant-platforms

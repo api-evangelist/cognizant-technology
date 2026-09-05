@@ -1,0 +1,58 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://github.com/cognizant-ai-lab/neuro-san-ui +
+  https://github.com/cognizant-ai-lab/nsflow +
+  https://github.com/cognizant-ai-lab/neuro-san-web-client
+note: >-
+  Cognizant AI Lab publishes client-side UI surfaces for Neuro SAN, distinct from the SDKs in
+  packages/. The important qualifier, verified rather than assumed: NONE of them is
+  distributed through a JavaScript registry. The component library's own package.json is
+  marked `private: true` and the npm registry returns 404 for its name, so a consumer must
+  build from source. Recorded as a real but source-only distribution.
+components:
+- family: neuro-san-ui
+  name: '@cognizant-ai-lab/neuro-san-ui'
+  kind: component-library
+  language: typescript
+  repository: https://github.com/cognizant-ai-lab/neuro-san-ui
+  description: UI components for MAA / Neuro SAN.
+  version: 1.0.0
+  version_source: package.json in the repository (main branch)
+  registry: none
+  registry_note: >-
+    package.json declares "private": true and https://registry.npmjs.org/@cognizant-ai-lab/
+    neuro-san-ui returns 404. Not installable from npm; consumed by building from source.
+  loader: null
+- family: nsflow
+  name: nsflow
+  kind: developer-front-end
+  language: typescript + python
+  repository: https://github.com/cognizant-ai-lab/nsflow
+  description: >-
+    A Neuro-San powered Smart Agent Network Framework — the developer-facing front end for
+    visualizing and interacting with agent networks.
+  version: 0.7.0
+  published: '2026-09-04'
+  registry: pypi
+  registry_note: >-
+    Unusually for a front end, nsflow ships through PyPI rather than npm — the built assets
+    are bundled into the Python distribution. There is no package.json at the repository root.
+  url: https://pypi.org/project/nsflow/
+- family: neuro-san-web-client
+  name: neuro-san-web-client
+  kind: embeddable-web-client
+  language: python
+  repository: https://github.com/cognizant-ai-lab/neuro-san-web-client
+  description: Web client demo interface for neuro-san.
+  version: 0.1.13
+  published: '2025-12-15'
+  registry: pypi
+  url: https://pypi.org/project/neuro-san-web-client/
+  note: >-
+    Described by the provider as a demo interface. Last released 2025-12-15, well behind the
+    core it wraps — see the currency note in packages/cognizant-technology-packages.yml.
+hosted_surfaces: []
+hosted_surfaces_note: >-
+  Cognizant hosts no public embeddable widget, embedded dashboard or prebuilt UI endpoint for
+  Neuro SAN. Every surface above runs inside the operator's own deployment.

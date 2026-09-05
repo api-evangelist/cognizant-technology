@@ -1,0 +1,91 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json +
+  grpc/cognizant-technology-agent.proto + grpc/cognizant-technology-concierge.proto +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/mcp_service.md
+note: >-
+  Neuro SAN is the unusual case where the crosswalk is stated by the provider rather than
+  inferred by us: docs/mcp_service.md says the MCP tool inputSchema is "replicated from
+  neuro-san OpenAPI specification", and the OpenAPI itself is generated from the same .proto
+  files that define the gRPC service. All three surfaces are projections of one core, so the
+  bindings below are high confidence even though no live MCP server was introspected.
+  The asymmetry worth recording: MCP exposes AGENT NETWORKS as tools, while REST exposes
+  SERVICE OPERATIONS. There is exactly one MCP tool shape (call an agent network) and it maps
+  to one REST operation; the three discovery operations have no MCP tool equivalent, because
+  MCP does its own discovery through tools/list.
+surfaces:
+  openapi:
+    file: openapi/cognizant-technology-neuro-san-agent-service.json
+    operations: 4
+    gated: false
+    note: served live by the running server at GET /api/v1/docs (OpenApiPublishHandler)
+  grpc:
+    files:
+    - grpc/cognizant-technology-agent.proto
+    - grpc/cognizant-technology-chat.proto
+    - grpc/cognizant-technology-concierge.proto
+    - grpc/cognizant-technology-mime-data.proto
+    services: 2
+    rpcs: 4
+    gated: false
+  mcp:
+    endpoint: null
+    endpoint_note: >-
+      no vendor-hosted endpoint; self-hosted at the operator's own POST /mcp
+    protocol_version: '2025-06-18'
+    gated: false
+    live_introspection: false
+    live_introspection_note: >-
+      tools/list was NOT called — there is no Cognizant-operated server to call it against.
+      Tool shape is read from the provider's documented tools/list response instead.
+  graphql:
+    present: false
+crosswalk:
+- tool: '<agent_network_name>'
+  category: agent-invocation
+  rest:
+  - AgentService_StreamingChat
+  grpc:
+  - dev.cognizant_ai.neuro_san.api.grpc.agent.AgentService.StreamingChat
+  binding: one-to-one
+  confidence: high
+  note: >-
+    Every public agent network in the operator's manifest becomes one MCP tool with that
+    network's name. A tools/call on it is a chat request, which is exactly what
+    AgentService_StreamingChat (POST /api/v1/{agent_name}/streaming_chat) performs, with
+    agent_name bound to the tool name. The tool is a template, not a fixed name: the concrete
+    tool list depends on the manifest the operator deploys. The documented example is
+    `hello_world`, shipped in the neuro-san repo registries.
+  divergence: >-
+    The REST operation server-streams ChatResponse messages; the MCP service deliberately
+    does not use streaming HTTP transport and returns a single JSON-RPC payload. Same
+    operation, different response delivery — an agent gets the final content block over MCP
+    and the full message stream over REST.
+mcp_only: []
+rest_only:
+- operation: ConciergeService_List
+  path: GET /api/v1/list
+  reason: >-
+    MCP performs its own discovery via the tools/list method, so the provider maps agent
+    listing onto the protocol rather than onto a tool. The information is reachable over MCP,
+    just not as a callable tool.
+- operation: AgentService_Function
+  path: GET /api/v1/{agent_name}/function
+  reason: >-
+    The function description is folded into each MCP tool's `description` field rather than
+    exposed as its own tool.
+- operation: AgentService_Connectivity
+  path: GET /api/v1/{agent_name}/connectivity
+  reason: >-
+    Internal agent-network connectivity introspection has no MCP equivalent. This is a genuine
+    REST-only capability — an agent using the MCP surface cannot see the internal topology of
+    the network it is calling.
+coverage:
+  rest_operations: 4
+  grpc_rpcs: 4
+  mcp_tool_shapes: 1
+  bound: 1
+  mcp_only: 0
+  rest_only: 3
+  unbound_mcp_tools: 0

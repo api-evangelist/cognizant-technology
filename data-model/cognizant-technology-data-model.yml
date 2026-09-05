@@ -1,0 +1,134 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json (components.schemas $ref graph) +
+  grpc/cognizant-technology-chat.proto + grpc/cognizant-technology-agent.proto
+note: >-
+  Entity graph derived from the $ref links between the 16 schemas the NeuroSan OpenAPI
+  declares. The model is a conversation model, not a CRUD resource model: there are no
+  id-reference fields and therefore no belongs_to edges — entities compose by containment.
+  The one identity-like field is `agent_name`, which is a PATH parameter rather than a body
+  field, so agent selection happens in the URL and never appears inside a schema.
+entities:
+- name: AgentInfo
+  domain: discovery
+  description: Description of an agent's function, as returned by the concierge listing.
+  fields: [agent_name, description, tags]
+  identifier: agent_name
+  identifier_note: >-
+    The only entity with a natural key. It is also the MCP tool name and the {agent_name} path
+    parameter on all three AgentService operations.
+- name: ConciergeResponse
+  domain: discovery
+  description: Response for the List operation.
+  relationships:
+  - has_many: AgentInfo
+    via: agents
+- name: Function
+  domain: discovery
+  description: >-
+    An agent's outward-facing function description, its chat-channel parameters, and the
+    schemas of the private sly_data channel in both directions.
+  fields: [description, parameters, sly_data_schema, sly_data_output_schema]
+- name: FunctionResponse
+  domain: discovery
+  relationships:
+  - has_one: Function
+    via: function
+- name: ConnectivityInfo
+  domain: discovery
+  description: >-
+    Connectivity of one agent-network node — the tool nodes reachable from it, which may
+    include references into external agent networks hosted on other servers.
+  fields: [origin, tools, display_as]
+- name: ConnectivityResponse
+  domain: discovery
+  relationships:
+  - has_many: ConnectivityInfo
+    via: connectivity_info
+- name: ChatRequest
+  domain: conversation
+  description: Request structure for the Chat method.
+  relationships:
+  - has_one: ChatMessage
+    via: user_message
+  - has_one: ChatContext
+    via: chat_context
+  - has_one: ChatFilter
+    via: chat_filter
+  fields: [sly_data]
+  field_notes:
+    sly_data: >-
+      A private data channel deliberately kept OUT of the LLM chat stream. Keys may appear in
+      the stream as references; the values are passed programmatically to tools. This is the
+      model's most distinctive design decision and the reason the conversation model has two
+      parallel channels rather than one.
+- name: ChatResponse
+  domain: conversation
+  relationships:
+  - has_one: ChatRequest
+    via: request
+  - has_one: ChatMessage
+    via: response
+- name: ChatMessage
+  domain: conversation
+  description: A single message in the chat stream.
+  fields: [type, text, structure, chat_context, origin, mime_data, sly_data]
+  enums:
+    type: [UNKNOWN, SYSTEM, HUMAN, AI, AGENT, AGENT_FRAMEWORK, AGENT_TOOL_RESULT, AGENT_PROGRESS]
+  relationships:
+  - has_many: MimeData
+    via: mime_data
+  - has_many: Origin
+    via: origin
+  - has_one: ChatContext
+    via: chat_context
+- name: ChatContext
+  domain: conversation
+  description: >-
+    Holds the state of play for a chat session. This is the continuation token of the API:
+    the last AGENT_FRAMEWORK message before the stream closes carries a populated
+    chat_context, which the client copies whole-cloth into the next request to continue.
+  relationships:
+  - has_many: ChatHistory
+    via: chat_histories
+- name: ChatHistory
+  domain: conversation
+  relationships:
+  - has_many: Origin
+    via: origin
+  - has_many: ChatMessage
+    via: messages
+- name: ChatFilter
+  domain: conversation
+  description: Controls which messages get streamed via StreamingChat.
+  enums:
+    chat_filter_type: [UNKNOWN, MINIMAL, MAXIMAL]
+- name: Origin
+  domain: conversation
+  description: >-
+    Identifies the originating tool of a message. Because one tool can be reached by more than
+    one path, an instantiation_index (0-based) disambiguates repeated invocations.
+  fields: [tool, instantiation_index]
+- name: MimeData
+  domain: media
+  description: Non-text media referenced by a chat message.
+  fields: [mime_type, mime_bytes]
+- name: Status
+  domain: error
+  description: The google.rpc.Status error envelope. See errors/cognizant-technology-problem-types.yml.
+  relationships:
+  - has_many: GoogleProtobufAny
+    via: details
+- name: GoogleProtobufAny
+  domain: error
+  description: Arbitrary serialized message identified by an '@type' string.
+id_prefixes: []
+id_prefixes_note: >-
+  The API uses no opaque or prefixed identifiers. Agent networks are addressed by their
+  human-readable manifest name.
+coverage:
+  schemas: 16
+  entities_mapped: 16
+  relationships: 15
+  belongs_to_edges: 0

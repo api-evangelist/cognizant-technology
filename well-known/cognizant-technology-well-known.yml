@@ -1,0 +1,99 @@
+generated: '2026-09-05'
+method: probed
+source: live HTTP probes with a browser User-Agent, 2026-09-05
+note: >-
+  Every named /.well-known/ path was probed on the registrable domain, its www host, and the
+  candidate API/developer hosts. Cognizant serves NO /.well-known/ document on any host: all
+  paths returned 404 on cognizant.com and www.cognizant.com, and developer.cognizant.com,
+  api.cognizant.com and neuro-ai.cognizant.com do not resolve (recorded as status 0 — DNS
+  failure, not an HTTP response). No WellKnown or SecurityTxt pointer is emitted, because a
+  recorded absence is not a served surface. The one machine-readable document the root host
+  does serve is /llms.txt (HTTP 200, text/plain, 80,849 bytes) — captured separately under
+  llms/ and pointed at with type LLMsTxt.
+  The neuro-san server hosts have no probe rows: neuro-san is self-hosted software with no
+  vendor-operated host to probe, so there is no Cognizant-controlled origin on which a
+  /.well-known/ document could exist.
+hosts:
+- host: www.cognizant.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: cognizant.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: developer.cognizant.com
+  note: host does not resolve (DNS failure); status 0 means no HTTP response was received
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/openid-configuration
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/api-catalog
+    status: 0
+  - path: /.well-known/ai-plugin.json
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0
+- host: api.cognizant.com
+  note: host does not resolve (DNS failure); status 0 means no HTTP response was received
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/openid-configuration
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/api-catalog
+    status: 0
+  - path: /.well-known/ai-plugin.json
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0
+- host: neuro-ai.cognizant.com
+  note: host does not resolve (DNS failure); status 0 means no HTTP response was received
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/openid-configuration
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/api-catalog
+    status: 0
+  - path: /.well-known/ai-plugin.json
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0

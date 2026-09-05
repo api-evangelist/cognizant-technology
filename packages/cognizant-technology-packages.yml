@@ -1,0 +1,106 @@
+generated: '2026-09-05'
+method: searched
+source: https://pypi.org/ registry metadata endpoints + https://github.com/cognizant-ai-lab
+note: >-
+  First-party client/server libraries published by Cognizant AI Lab (the Cognizant Technology
+  Solutions research organization) for the Neuro SAN multi-agent framework. Every package below
+  was read from the PyPI JSON metadata endpoint (pypi.org/pypi/<pkg>/json); `version` is the
+  latest published release and `published` is that release's upload date. Authorship was
+  confirmed first-party from the PyPI `author_email` field, which carries @cognizant.com
+  addresses, and from the GitHub repository under the cognizant-ai-lab organization.
+  No npm, Maven Central, NuGet, RubyGems, crates.io, Packagist or pkg.go.dev distribution was
+  found for this provider; the TypeScript repositories (nsflow front end, neuro-san-ui) are
+  built from source in-repo and are not published to a JavaScript registry.
+packages:
+- name: neuro-san
+  registry: pypi
+  url: https://pypi.org/project/neuro-san/
+  repository: https://github.com/cognizant-ai-lab/neuro-san
+  language: python
+  official: true
+  version: 0.7.0
+  published: '2026-09-03'
+  license: Apache-2.0
+  requires_python: '>=3.12'
+  release_count: 149
+  description: >-
+    NeuroAI data-driven System for multi-Agent Networks - client, library and server.
+    Ships the gRPC contracts (agent/chat/concierge/mime_data .proto), the generated
+    OpenAPI 3.0.3 document the server publishes at /api/v1/docs, the HTTP service, the
+    MCP service, and the agent_cli client.
+  maintainer_email: Daniel.Fink@cognizant.com
+- name: nsflow
+  registry: pypi
+  url: https://pypi.org/project/nsflow/
+  repository: https://github.com/cognizant-ai-lab/nsflow
+  language: python
+  official: true
+  version: 0.7.0
+  published: '2026-09-04'
+  description: A Neuro-San powered Smart Agent Network Framework — developer front end for neuro-san.
+- name: leaf-common
+  registry: pypi
+  url: https://pypi.org/project/leaf-common/
+  repository: https://github.com/cognizant-ai-lab/leaf-common
+  language: python
+  official: true
+  version: 1.4.0
+  published: '2026-09-03'
+  description: LEAF team common code library (Cognizant AI Lab shared utilities).
+  maintainer_email: Daniel.Fink@cognizant.com
+- name: leaf-server-common
+  registry: pypi
+  url: https://pypi.org/project/leaf-server-common/
+  repository: https://github.com/cognizant-ai-lab/leaf-server-common
+  language: python
+  official: true
+  version: 0.1.25
+  published: '2026-06-18'
+  description: Library for common service infrastructure for use by Cognizant AI Lab services.
+  maintainer_email: Daniel.Fink@cognizant.com
+- name: neuro-san-web-client
+  registry: pypi
+  url: https://pypi.org/project/neuro-san-web-client/
+  repository: https://github.com/cognizant-ai-lab/neuro-san-web-client
+  language: python
+  official: true
+  version: 0.1.13
+  published: '2025-12-15'
+  description: Web client demo interface for neuro-san.
+  maintainer_email: olivier.francon@cognizant.com
+  note: >-
+    Currency signal — last release 2025-12-15, roughly nine months behind the neuro-san
+    core it wraps (0.7.0, 2026-09-03). Recorded as observed decay evidence, not a judgement.
+- name: neuro-san-studio
+  registry: pypi
+  url: https://pypi.org/project/neuro-san-studio/
+  repository: https://github.com/cognizant-ai-lab/neuro-san-studio
+  language: python
+  official: true
+  version: 0.4.0
+  published: '2026-09-04'
+  description: Multi-agent orchestration studio built on the neuro-san framework.
+  note: >-
+    PyPI metadata carries no author_email; first-party status established from the
+    cognizant-ai-lab GitHub organization named in its Homepage project URL.
+registries_checked:
+- registry: pypi
+  result: 6 first-party packages found
+- registry: npm
+  result: >-
+    no first-party package found (probed nsflow, neuro-san-ui, @cognizant-ai-lab/neuro-san-ui,
+    @cognizant/neuro-san — all 404)
+- registry: maven-central
+  result: none found
+- registry: nuget
+  result: none found
+- registry: rubygems
+  result: none found
+- registry: crates.io
+  result: none found
+- registry: packagist
+  result: none found
+- registry: pkg.go.dev
+  result: >-
+    none published; the .proto files declare a go_package option
+    (github.com/cognizant-ai-lab/neuro_san/internal/gen/...) but no Go module is published

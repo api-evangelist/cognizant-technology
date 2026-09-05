@@ -37,20 +37,91 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cognizant-technology.png
 access: 3rd-Party
 created: '2025-03-21'
-modified: '2026-04-28'
-position: Consuming
+modified: '2026-09-05'
+position: Producing
 description: >-
-  Cognizant Technology Solutions is a multinational information technology
-  services and consulting company that provides digital, technology,
-  consulting, and operations services to clients worldwide. Cognizant does not
-  publish a general-purpose public REST API. Its developer-facing footprint is
-  centered on the Cognizant Neuro AI platform family (Neuro AI Decisioning,
-  Neuro AI Enterprise Core, Neuro AI Engineering, Neuro AI for IT Operations)
-  and the open-source Neuro SAN multi-agent orchestration framework released
-  by Cognizant AI Lab. Other delivered platforms (BigFrame for mainframe data
-  migration, ADM accelerators, industry vertical solutions) are typically
-  engaged via consulting engagements rather than self-service APIs.
-apis: []
+  Cognizant Technology Solutions is a multinational information technology services and
+  consulting company that provides digital, technology, consulting, and operations services
+  to clients worldwide. Cognizant publishes no hosted, general-purpose commercial API and
+  operates no developer portal - developer.cognizant.com and api.cognizant.com do not
+  resolve. It does, however, publish a real machine-readable API contract: Cognizant AI Lab
+  releases Neuro SAN (Neuro AI System of Agent Networks), an Apache-2.0 multi-agent
+  orchestration framework whose agent service ships four .proto files defining two gRPC
+  services, a generated OpenAPI 3.0.3 document the running server publishes at /api/v1/docs,
+  and an MCP 2025-06-18 endpoint that exposes each public agent network as a callable tool.
+  The framework is self-hosted - Cognizant ships the software and the operator runs the
+  server - so there is no Cognizant-operated endpoint, no pricing, and no rate limit to
+  publish. Six first-party Python packages are on PyPI, led by neuro-san (0.7.0, 149
+  releases, actively developed). The commercial Neuro AI platform family (Neuro AI
+  Decisioning, Neuro AI Enterprise Core, Neuro AI Engineering, Neuro AI for IT Operations)
+  and other delivered platforms are engaged through consulting rather than self-service APIs.
+apis:
+  - name: Cognizant Neuro SAN Agent Service
+    description: >-
+      The HTTP/gRPC/MCP service surface of Neuro SAN (Neuro AI System of Agent Networks),
+      the open-source multi-agent orchestration framework published by Cognizant AI Lab
+      under Apache-2.0. Four operations: list the agent networks a deployment exposes,
+      read a network's function description and private sly_data schemas, inspect its
+      internal connectivity, and hold a streaming conversation with it. The same core is
+      projected three ways - a gRPC service defined in four .proto files, a REST
+      projection generated from those protos via google.api.http annotations and published
+      by the running server at /api/v1/docs, and an MCP 2025-06-18 endpoint that exposes
+      each public agent network as a callable tool. Self-hosted: Cognizant publishes the
+      software, the operator runs the server.
+    humanURL: https://www.cognizant.com/us/en/ai-lab/neuro-san
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cognizant-technology.png
+    baseURL: '{scheme}://{host}:{port}/api/v1'
+    x-baseurl-note: >-
+      TEMPLATED ON PURPOSE - do not "repair" this into a concrete Cognizant hostname. Neuro
+      SAN is self-hosted software: Cognizant publishes the framework and the operator runs
+      the server, so there is no vendor-operated API host. The published OpenAPI carries no
+      servers[] block at all, and the provider's own documented examples use
+      http://localhost:8080 after the operator starts server_main_loop. repair-api-bases.py
+      returns verdict "missing" here because no source names a host; the docs were read and
+      they genuinely do not state one, because none exists. The same templated server is
+      recorded in overlays/cognizant-technology-neuro-san-agent-service-overlay.yaml rather
+      than written into the verbatim spec.
+    tags:
+      - Multi-Agent
+      - Agent Orchestration
+      - MCP
+      - gRPC
+      - Neuro AI
+      - Open Source
+    properties:
+      - type: OpenAPI
+        url: openapi/cognizant-technology-neuro-san-agent-service.json
+      - type: Protobuf
+        url: grpc/cognizant-technology-agent.proto
+      - type: Protobuf
+        url: grpc/cognizant-technology-chat.proto
+      - type: Protobuf
+        url: grpc/cognizant-technology-concierge.proto
+      - type: Protobuf
+        url: grpc/cognizant-technology-mime-data.proto
+      - type: Overlay
+        url: overlays/cognizant-technology-neuro-san-agent-service-overlay.yaml
+      - type: MCPServer
+        url: mcp/cognizant-technology-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/cognizant-technology-tool-crosswalk.yml
+      - type: DataModel
+        url: data-model/cognizant-technology-data-model.yml
+      - type: ErrorCatalog
+        url: errors/cognizant-technology-problem-types.yml
+      - type: Conventions
+        url: conventions/cognizant-technology-conventions.yml
+      - type: Authentication
+        url: authentication/cognizant-technology-authentication.yml
+      - type: Documentation
+        url: https://github.com/cognizant-ai-lab/neuro-san/tree/main/docs
+      - type: APIReference
+        url: >-
+          https://github.com/cognizant-ai-lab/neuro-san/blob/main/neuro_san/api/grpc/agent_service.json
+      - type: GettingStarted
+        url: https://github.com/cognizant-ai-lab/neuro-san/tree/main/quick-start
+      - type: SourceCode
+        url: https://github.com/cognizant-ai-lab/neuro-san
 common:
   - type: DomainSecurity
     url: security/cognizant-technology-domain-security.yml
@@ -79,10 +150,49 @@ common:
   - type: PrivacyPolicy
     url: https://www.cognizant.com/us/en/privacy-notice
   - type: TermsOfService
-    url: https://www.cognizant.com/us/en/terms-of-use
+    url: https://www.cognizant.com/us/en/about-cognizant/terms-conditions
   - url: https://www.cognizant.com/us/en/insights/insights-blog
     type: Blog
+  - type: Packages
+    url: packages/cognizant-technology-packages.yml
+  - type: SDKs
+    url: packages/cognizant-technology-packages.yml
+  - type: CLI
+    url: cli/cognizant-technology-cli.yml
+  - type: Components
+    url: components/cognizant-technology-components.yml
+  - type: LLMsTxt
+    url: llms/cognizant-technology-llms.txt
+  - type: Conformance
+    url: conformance/cognizant-technology-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/cognizant-technology-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/cognizant-technology-changelog.yml
+  - type: VulnerabilityDisclosure
+    url: security/cognizant-technology-vulnerability-disclosure.yml
+  - type: Security
+    url: security/cognizant-technology-vulnerability-disclosure.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Plans
+    url: plans/cognizant-technology-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/cognizant-technology-rate-limits.yml
+  - type: Documentation
+    url: https://github.com/cognizant-ai-lab/neuro-san/tree/main/docs
+  - type: GettingStarted
+    url: https://github.com/cognizant-ai-lab/neuro-san/tree/main/quick-start
+  - type: Support
+    url: https://github.com/cognizant-ai-lab/neuro-san/issues
+  - type: Releases
+    url: https://github.com/cognizant-ai-lab/neuro-san/releases
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v3

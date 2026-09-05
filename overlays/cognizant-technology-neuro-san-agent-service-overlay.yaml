@@ -1,0 +1,141 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Cognizant Neuro SAN agent service
+  version: 1.0.0
+extends: ../openapi/cognizant-technology-neuro-san-agent-service.json
+x-provenance:
+  generated: '2026-09-05'
+  method: generated
+  source: >-
+    Derived from the provider's own documentation (neuro-san README, docs/clients.md,
+    docs/mcp_service.md, agent.proto comments) and from this repository's artifacts. Every
+    action below adds context the published contract omits; none contradicts it and the
+    original spec is never mutated.
+  note: >-
+    The single highest-value addition here is the servers[] block. The published contract has
+    NO servers[] at all, which leaves a client with four paths and no host to send them to.
+    The value added is TEMPLATED on purpose — neuro-san is self-hosted, so the host genuinely
+    is a variable, and inventing a concrete Cognizant hostname would be a fabrication.
+actions:
+- target: $
+  description: >-
+    Add a templated server. neuro-san is self-hosted software; the provider's own examples use
+    http://localhost:8080 after the operator starts the server. The variables make the host and
+    port explicit rather than guessed.
+  update:
+    servers:
+    - url: '{scheme}://{host}:{port}'
+      description: >-
+        An operator-run neuro-san agent service. Not a Cognizant-hosted endpoint — Cognizant
+        publishes the software, the operator runs the server.
+      variables:
+        scheme:
+          default: http
+          enum:
+          - http
+          - https
+          description: >-
+            The provider's documented examples use http on loopback. TLS termination is the
+            operator's responsibility and is not required by the contract.
+        host:
+          default: localhost
+          description: The host on which the operator runs server_main_loop.
+        port:
+          default: '8080'
+          description: >-
+            The port used throughout the provider's own curl examples in docs/mcp_service.md.
+- target: $.info
+  description: >-
+    Correct the record on info.version and name the real upstream. The document's declared
+    version is a generator default that has never tracked the software.
+  update:
+    x-upstream-version: 0.7.0
+    x-upstream-version-released: '2026-09-03'
+    x-version-warning: >-
+      info.version is "0.0.1", a protoc-gen-openapi default. It does not track the neuro-san
+      release. Read currency from the PyPI package version instead.
+    x-license: Apache-2.0
+    x-source-repository: https://github.com/cognizant-ai-lab/neuro-san
+    x-generated-from: >-
+      neuro_san/api/grpc/{concierge,agent,chat,mime_data}.proto via protoc-gen-openapi
+    x-published-at-runtime: GET /api/v1/docs
+- target: $
+  description: Record the sibling surfaces this REST projection coexists with.
+  update:
+    x-surfaces:
+      grpc:
+        services:
+        - dev.cognizant_ai.neuro_san.api.grpc.agent.AgentService
+        - dev.cognizant_ai.neuro_san.api.grpc.concierge.ConciergeService
+        note: >-
+          The REST paths below are google.api.http annotations on these RPCs; gRPC is the
+          source of truth, not a parallel implementation.
+      mcp:
+        protocol_version: '2025-06-18'
+        transport: JSON-RPC 2.0 over HTTP POST
+        path: /mcp
+        note: >-
+          Enabled with --mcp_enable=true. Each public agent network becomes one MCP tool.
+          See mcp/cognizant-technology-tool-crosswalk.yml.
+- target: $.paths['/api/v1/{agent_name}/streaming_chat'].post
+  description: >-
+    Document the streaming and continuation semantics. These are stated in agent.proto's
+    comments and are load-bearing for any client, but the generated OpenAPI drops comments
+    entirely, so a client reading only the spec would get them wrong.
+  update:
+    x-streaming:
+      type: server-streaming
+      framing: >-
+        Any single response is always on one line; responses are never broken across multiple
+        lines in the HTTP response, so a client can parse the stream line by line.
+      answer_location: >-
+        The answer to a query is in the LAST streamed AGENT_FRAMEWORK message — not the first
+        message and not necessarily the final message of the stream.
+      mcp_divergence: >-
+        The MCP projection of this operation does not stream; it returns a single JSON-RPC
+        payload.
+    x-continuation:
+      mechanism: chat_context
+      how: >-
+        The last AGENT_FRAMEWORK message before the stream closes carries a populated
+        chat_context. Copy it whole-cloth into the chat_context of the next request to
+        continue the conversation.
+    x-idempotency:
+      supported: false
+      warning: >-
+        No replay protection. Calling this twice starts two conversations and bills the
+        operator's LLM provider twice. A retry after a timeout cannot be made safe from the
+        client side.
+    x-private-channel:
+      field: sly_data
+      note: >-
+        An optional map deliberately excluded from the LLM chat stream. Keys may be referenced
+        in the stream; values are passed programmatically to tools. Documented carrier for
+        client-supplied API keys, usernames and session ids.
+- target: $.paths['/api/v1/list'].get
+  description: Record that this listing is unpaginated and may be withheld.
+  update:
+    x-pagination:
+      supported: false
+      note: Returns the full agents array; no limit, offset, cursor or page parameter exists.
+    x-visibility:
+      note: >-
+        Only agent networks the server marks public are listed. The provider states the chat
+        client is deliberately unable to enumerate all registered agents.
+- target: $.paths['/api/v1/{agent_name}/connectivity'].get
+  description: Record that connectivity output is deliberately partial.
+  update:
+    x-disclosure:
+      note: >-
+        Per connectivity.proto's own comment, server-side agent descriptions may withhold
+        connectivity they deem private or too much of an implementation detail. Connectivity
+        reported is only as much as the server wants a client to know — an empty or shallow
+        result is not necessarily an error.
+- target: $.components.schemas.Status
+  description: Name the error model explicitly so a client does not expect RFC 9457.
+  update:
+    x-error-model: google.rpc.Status
+    x-rfc9457: false
+    x-note: >-
+      Not application/problem+json. There is no type, title, status, detail or instance member.
+      See errors/cognizant-technology-problem-types.yml.

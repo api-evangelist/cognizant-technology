@@ -1,0 +1,34 @@
+generated: '2026-09-05'
+method: generated
+source: >-
+  openapi/cognizant-technology-neuro-san-agent-service.json + grpc/*.proto +
+  conventions/cognizant-technology-conventions.yml + the neuro-san documentation
+note: >-
+  Packaged Agent Skills for the Cognizant Neuro SAN agent service. Every operationId
+  referenced was grepped out of the published OpenAPI before being written down; none is
+  invented. The provider publishes no skills/ or AGENTS.md of its own — searched the neuro-san
+  repository and found none — so these are generated from the contract and the provider's
+  documentation.
+  Two skills cover the whole surface: the four operations split cleanly into discovery (three)
+  and conversation (one).
+skills:
+- name: cognizant-technology-discover-agent-networks
+  file: cognizant-technology-discover-agent-networks.md
+  description: >-
+    Discover which agent networks a deployment exposes, what each does, and what it needs —
+    before starting a conversation.
+  operations:
+  - ConciergeService_List
+  - AgentService_Function
+  - AgentService_Connectivity
+- name: cognizant-technology-converse-with-an-agent-network
+  file: cognizant-technology-converse-with-an-agent-network.md
+  description: >-
+    Hold a multi-turn conversation over the streaming HTTP API — reading the stream, carrying
+    chat_context forward, and keeping private data on the sly_data channel.
+  operations:
+  - AgentService_StreamingChat
+  - AgentService_Function
+coverage:
+  operations_in_spec: 4
+  operations_covered: 4

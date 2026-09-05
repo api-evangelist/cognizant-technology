@@ -1,0 +1,102 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/README.md +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/hocon_validator_cli.md +
+  https://github.com/cognizant-ai-lab/neuro-san/blob/main/docs/clients.md
+docs: https://github.com/cognizant-ai-lab/neuro-san#readme
+note: >-
+  Cognizant AI Lab ships first-party command-line tooling with neuro-san. There is no
+  standalone named binary on PATH — the tools are Python module entry points invoked with
+  `python -m`, which is why they are documented here rather than as a separate package. The
+  distribution itself is the neuro-san PyPI package recorded in
+  packages/cognizant-technology-packages.yml.
+name: neuro-san command-line tools
+binary: null
+binary_note: >-
+  No console_scripts entry point is exposed; every command below is `python -m <module>`.
+install:
+- method: pip
+  command: pip install neuro-san
+  package: https://pypi.org/project/neuro-san/
+- method: from-source
+  command: pip install -r requirements.txt
+  note: from the neuro-san repository top level, with PYTHONPATH set to the repo root
+- method: quick-start-script
+  command: ./quick-start/start-server.sh
+  windows_command: quick-start\start-server.bat
+  note: >-
+    Provider-supplied one-command bootstrap that creates the virtualenv, installs
+    dependencies, sets environment variables, enables CORS and launches the server.
+commands:
+- group: client
+  command: python -m neuro_san.client.agent_cli
+  description: >-
+    Interactive chat client for an agent network. The reference client implementation — the
+    provider points at its source as the worked example for building your own.
+  flags:
+  - flag: --agent <name>
+    description: the agent network to talk to, named by its HOCON file stem
+  - flag: --http
+    description: connect to a running server over HTTP instead of running in-process
+  - flag: --local_externals_service
+    description: >-
+      sets use_direct=False, so external agent networks (tools prefixed with /) are resolved
+      over HTTP to a running server rather than in-process
+  - flag: --first_prompt_file <path>
+    description: >-
+      send a file as the first message. Exists because a newline in the interactive client
+      means "send", which makes pasting multi-line input awkward
+  - flag: --sly_data <json>
+    description: >-
+      a single escaped JSON dictionary of private data that is kept out of the LLM chat
+      stream, e.g. --sly_data "{ \"login\": \"your_login\" }"
+  - flag: --help
+    description: full flag reference
+  behavior_note: >-
+    By design the client cannot enumerate the agents registered with a server — agent
+    discovery from the client is deliberately withheld.
+- group: server
+  command: python -m neuro_san.service.main_loop.server_main_loop
+  description: Run the agent service (HTTP, gRPC and optionally MCP) directly.
+  flags:
+  - flag: --mcp_enable=true
+    description: also serve the MCP endpoint alongside the native API (env AGENT_MCP_ENABLE)
+  - flag: --mcp_only=true
+    description: serve only the MCP endpoint and disable the native API (env AGENT_MCP_ONLY)
+- group: validation
+  command: python -m neuro_san.client.hocon_validator_cli <path/to/agent.hocon>
+  description: >-
+    Validate a HOCON agent-network configuration against neuro-san's validation rules —
+    missing or unreachable agents, invalid tool names, empty instructions, invalid URL
+    references, and malformed function.parameters blocks (nested keys, bad required refs,
+    unrecognized types).
+  flags:
+  - flag: --verbose
+    description: detailed validation output
+  - flag: --registry-dir <path>
+    description: >-
+      override the registry directory used to resolve HOCON include statements. Defaults to
+      the grandparent of AGENT_MANIFEST_FILE when that variable is set, otherwise the current
+      working directory.
+- group: deploy
+  command: ./neuro_san/deploy/build.sh ; ./neuro_san/deploy/run.sh
+  description: >-
+    Build and run the agent service as a Docker container. The provider states these scripts
+    are intended to be portable to your own registries and coded tools.
+  note: >-
+    Requires OPENAI_API_KEY, AGENT_TOOL_PATH, AGENT_MANIFEST_FILE and PYTHONPATH to be passed
+    into the container.
+environment_variables:
+- name: OPENAI_API_KEY
+  purpose: LLM provider credential; other provider keys as needed
+- name: AGENT_MANIFEST_FILE
+  purpose: path to the manifest HOCON listing every agent network to serve
+- name: AGENT_TOOL_PATH
+  purpose: root under which CodedTool classes are dynamically resolved by agent name
+- name: PYTHONPATH
+  purpose: repository root
+- name: AGENT_MCP_ENABLE
+  purpose: enable the MCP service alongside the native API
+- name: AGENT_MCP_ONLY
+  purpose: serve only the MCP endpoint
