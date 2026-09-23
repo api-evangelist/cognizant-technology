@@ -1,7 +1,9 @@
 ---
 title: Cognizant News & Events | Cognizant Press Releases ...
 url: https://news.cognizant.com/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Cognizant Technology Solutions" press release artificial intelligence'
 position: 1
 source: serpapi-google

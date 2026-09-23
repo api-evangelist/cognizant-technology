@@ -1,7 +1,9 @@
 ---
 title: Investor Relations | Cognizant
 url: https://investors.cognizant.com/home/default.aspx
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Cognizant Technology Solutions" press release artificial intelligence'
 position: 4
 source: serpapi-google
