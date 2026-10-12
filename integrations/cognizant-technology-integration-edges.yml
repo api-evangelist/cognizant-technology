@@ -1,0 +1,27 @@
+edges:
+- partner_name: CAMARA
+  partner: camara-project
+  type: contract
+  channel: network-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://raw.githubusercontent.com/camaraproject/camara-landscape/main/landscape.yml
+  contract_reference:
+    register: CAMARA landscape (Linux Foundation CAMARA project)
+    spec_file: null
+    role: participating-organization
+    tier: participating-organization
+    landscape_roles:
+    - System Integrators
+    - Network Capability Solution Providers
+    - Transformation Function Solution Providers
+    registered_name: Cognizant
+    matched_domain: cognizant.com
+    api_families: null
+    api_families_basis: null
+    detected_by: sweep-telco-network-apis.py
+    detected: '2026-10-12'
+generated: '2026-10-12'
+method: searched
+checked:
+- https://raw.githubusercontent.com/camaraproject/camara-landscape/main/landscape.yml
