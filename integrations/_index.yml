@@ -29,3 +29,27 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: cognizant-technology-aws-marketplace
+  label: AWS Marketplace
+  partner: amazon-web-services
+  partner_name: AWS Marketplace
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=2a641c19-3444-4890-9738-e82a8ea39302
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: cognizant-technology-microsoft-azure-marketplace
+  label: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_name: Microsoft Azure Marketplace
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Cognizant
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
