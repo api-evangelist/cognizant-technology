@@ -53,3 +53,16 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: cognizant-technology-guidewire-own
+  label: Guidewire (own)
+  partner: guidewire
+  partner_name: Guidewire (own)
+  category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.guidewire.com/product/01tPW00000L1alJYAR/01tPW00000L1alJYAR
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

@@ -54,10 +54,44 @@ edges:
   seller_name: Cognizant
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Guidewire (own)
+  partner: guidewire
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.guidewire.com/product/01tPW00000L1alJYAR/01tPW00000L1alJYAR
+  mirror_of: guidewire/integrations/guidewire-integration-edges.yml
+  apps:
+  - AUS Farm Pack Insurance Product Model by Cognizant
+  - GWCP Intelligent Deployment Orchestrator IG App by Cognizant
+  - Cloud Data Access (CDA) Ingestion Framework by Cognizant
+  - USA Aviation Insurance Product Model by Cognizant
+  - EMEA Sports Insurance Product Model by Cognizant
+  - Canada Contingent Lessor Product Model by Cognizant
+  - USA Technology Consultants Policy Product Model by Cognizant
+  - Canada Non-Owned Auto Product Model by Cognizant
+  - Canada Excess Auto Product Model by Cognizant
+  - USA Architects & Engineers Product Model by Cognizant
+  - USA Earthquake Insurance Product Model by Cognizant
+  listing_count: 11
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
+  badges:
+  - GO Products
+  - 'Partner tier: Global Premier'
+  - Ready for Guidewire
 generated: '2026-10-12'
 method: searched
 checked:
+- guidewire/integrations/guidewire-integration-edges.yml
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
 - https://raw.githubusercontent.com/camaraproject/camara-landscape/main/landscape.yml
 marketplace_apps: []
+source:
+- guidewire/integrations/guidewire-integration-edges.yml
