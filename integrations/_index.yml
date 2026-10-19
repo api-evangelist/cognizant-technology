@@ -66,3 +66,252 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: cognizant-technology-aws-partner-network-services
+  label: AWS Partner Network (services)
+  partner: amazon-web-services
+  partner_name: AWS Partner Network (services)
+  category: Services partner
+  type: register
+  channel: standard-directory
+  evidence: https://partners.amazonaws.com/partners/001E000000NaBHOIA3
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: AWS Partner Solutions Finder (api.finder.partners.aws.a2z.com/search)
+    spec_file: null
+    standard: AWS Partner Network (services path)
+    role: aws-services-partner
+    registered_name: Cognizant
+    register_id: 001E000000NaBHOIA3
+    partner_tier: Premier
+    matched_domain: cognizant.com
+    matched_by: domain
+    identity_source: the register's own website / profile URL for the firm (no lookup)
+    signal_note: listing = participation; certified_products = one entry per designation the program awards the
+      FIRM (lapsed flagged); partner_tier and context are never counted (breadth is not credit)
+    detected_by: sweep-professional-services.py
+    detected: '2026-10-19'
+    partner_paths:
+    - path_name: Services Path
+      path_tier: Premier
+      path_stage: Differentiated
+    - path_name: Software Path
+      path_tier: null
+      path_stage: Differentiated
+    context:
+      service_deliveries: 7
+      professional_service_types:
+      - Cloud Migration Services
+      - Custom Application Development
+      - Digital Marketing
+      - Managed Service Provider
+      - Strategic / IT Consulting
+      - Systems Integration
+      - Other
+      - Assessments
+      programs:
+      - AWS Managed Service Provider
+      - AWS Solution Provider Program
+      - AWS Public Sector Solution Provider
+      - ISV Accelerate
+      - AWS Well-Architected Partner Program
+      - Backed by AWS Support
+      hq_country: United States
+    certified_products:
+    - product: AI Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Automotive Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Cloud Operations Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Data Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: DevOps Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Education Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Energy & Utilities Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Financial Services Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Healthcare Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: High Performance Computing ISV Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Life Sciences Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Machine Learning Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Mainframe Modernization Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Manufacturing and Industrial Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Migration and Modernization Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: SAP Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Telecom Services Competency
+      type: AWS Competency
+      lapsed: false
+    - product: Travel and Hospitality Consulting Competency
+      type: AWS Competency
+      lapsed: false
+    - product: AWS Managed Service Provider (MSP)
+      type: AWS program validation
+      lapsed: false
+  status: not-a-workflow
+  arazzo: null
+- slug: cognizant-technology-databricks-consulting-si-partner-program
+  label: Databricks Consulting & SI Partner Program
+  partner: databricks
+  partner_name: Databricks Consulting & SI Partner Program
+  category: Services partner
+  type: register
+  channel: standard-directory
+  evidence: https://www.databricks.com/company/partners/consulting-and-si
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Databricks partner directory (en-partners-assets/data/partner/all/en.json)
+    spec_file: null
+    standard: Databricks C&SI partner
+    role: databricks-csi-partner
+    registered_name: Cognizant
+    register_id: '5398'
+    partner_tier: null
+    matched_domain: cognizant.com
+    matched_by: domain
+    identity_source: the register's own website / profile URL for the firm (no lookup)
+    signal_note: listing = participation; certified_products = one entry per designation the program awards the
+      FIRM (lapsed flagged); partner_tier and context are never counted (breadth is not credit)
+    detected_by: sweep-professional-services.py
+    detected: '2026-10-19'
+    context:
+      regions:
+      - Asia-Pacific
+      - Europe
+      - North America
+  status: not-a-workflow
+  arazzo: null
+- slug: cognizant-technology-salesforce-consulting-partner-program
+  label: Salesforce Consulting Partner Program
+  partner: salesforce
+  partner_name: Salesforce Consulting Partner Program
+  category: Services partner
+  type: register
+  channel: standard-directory
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N30000001qFhiEAE
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Salesforce AppExchange consultants (recommendations/v3 listings type=consultants)
+    spec_file: null
+    standard: Salesforce consulting partner (AppExchange)
+    role: salesforce-consulting-partner
+    registered_name: Cognizant Technology Solutions
+    register_id: a0N30000001qFhiEAE
+    partner_tier: Summit
+    matched_domain: cognizant.com
+    matched_by: domain
+    identity_source: the register's own website / profile URL for the firm (no lookup)
+    signal_note: listing = participation; certified_products = one entry per designation the program awards the
+      FIRM (lapsed flagged); partner_tier and context are never counted (breadth is not credit)
+    detected_by: sweep-professional-services.py
+    detected: '2026-10-19'
+    certified_products:
+    - product: Agriculture and Mining (Cloud Expert)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Energy and Utilities (Cloud Accredited)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Financial Services (Cloud Expert)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Healthcare and Life Sciences (Cloud Expert)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Manufacturing (Cloud Accredited)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Retail (Cloud Expert)
+      type: Salesforce industry expertise
+      lapsed: false
+    - product: Agentforce Marketing (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Agentforce Sales (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Agentforce Service (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Analytics (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Data 360 (Cloud Accredited)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Platform (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+    - product: Small Business (Cloud Expert)
+      type: Salesforce product expertise
+      lapsed: false
+  status: not-a-workflow
+  arazzo: null
+- slug: cognizant-technology-snowflake-services-partner-program
+  label: Snowflake Services Partner Program
+  partner: snowflake
+  partner_name: Snowflake Services Partner Program
+  category: Services partner
+  type: register
+  channel: standard-directory
+  evidence: https://www.snowflake.com/en/why-snowflake/partners/all-partners/cognizant/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Snowflake partner directory (filterable_resources.filter.json + partner model.json)
+    spec_file: null
+    standard: Snowflake services partner
+    role: snowflake-services-partner
+    registered_name: Cognizant Technology Solutions US Corp
+    register_id: cognizant
+    partner_tier: Elite
+    matched_domain: cognizant.com
+    matched_by: domain
+    identity_source: the register's own website / profile URL for the firm (no lookup)
+    signal_note: listing = participation; certified_products = one entry per designation the program awards the
+      FIRM (lapsed flagged); partner_tier and context are never counted (breadth is not credit)
+    detected_by: sweep-professional-services.py
+    detected: '2026-10-19'
+    context:
+      badge: Snowflake AI Data Cloud Elite Services Partner badge
+    certified_products:
+    - product: Financial Services
+      type: Snowflake competency
+      lapsed: false
+    - product: Healthcare & Life Sciences
+      type: Snowflake competency
+      lapsed: false
+    - product: Analytics
+      type: Snowflake workload specialization
+      lapsed: false
+  status: not-a-workflow
+  arazzo: null
