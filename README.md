@@ -1,4 +1,4 @@
-# Cognizant Technology Solutions (cognizant-technology)
+# Cognizant Technology Solutions
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,51 +64,118 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cognizant Technology Solutions is a multinational information technology services and consulting company that provides digital, technology, consulting, and operations services to clients worldwide. Cognizant does not publish a general-purpose public REST API. Its developer-facing footprint is centered on the Cognizant Neuro AI platform family (Neuro AI Decisioning, Neuro AI Enterprise Core, Neuro AI Engineering, Neuro AI for IT Operations) and the open-source Neuro SAN multi-agent orchestration framework released by Cognizant AI Lab. Other delivered platforms (BigFrame for mainframe data migration, ADM accelerators, industry vertical solutions) are typically engaged via consulting engagements rather than self-service APIs.
+Cognizant Technology Solutions is a multinational information technology services and consulting company that provides digital, technology, consulting, and operations services to clients worldwide. Cognizant publishes no hosted, general-purpose commercial API and operates no developer portal - developer.cognizant.com and api.cognizant.com do not resolve. It does, however, publish a real machine-readable API contract: Cognizant AI Lab releases Neuro SAN (Neuro AI System of Agent Networks), an Apache-2.0 multi-agent orchestration framework whose agent service ships four .proto files defining two gRPC services, a generated OpenAPI 3.0.3 document the running server publishes at /api/v1/docs, and an MCP 2025-06-18 endpoint that exposes each public agent network as a callable tool. The framework is self-hosted - Cognizant ships the software and the operator runs the server - so there is no Cognizant-operated endpoint, no pricing, and no rate limit to publish. Six first-party Python packages are on PyPI, led by neuro-san (0.7.0, 149 releases, actively developed). The commercial Neuro AI platform family (Neuro AI Decisioning, Neuro AI Enterprise Core, Neuro AI Engineering, Neuro AI for IT Operations) and other delivered platforms are engaged through consulting rather than self-service APIs.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/cognizant-technology/refs/heads/main/apis.yml)
+**Areas:** AI Platform · Consulting · Digital Transformation · IT Services · Multi-Agent · Neuro AI · Fortune 500
 
-## Scope
+## Cognizant Technology Solutions on APIs.io
 
-- **Type:** Index
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Cognizant Technology Solutions is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cognizant-technology/](https://apis.io/providers/cognizant-technology/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- AI Platform
-- Consulting
-- Digital Transformation
-- IT Services
-- Multi-Agent
-- Neuro AI
+- [Cognizant Technology Solutions Agent Service API](https://apis.io/apis/cognizant-technology/cognizant-technology-agentservice-api/) — The service comprises all the exchanges to the backend in support of a single agent's services. Routing is done by way of agent name on the grpc service…
+- [Cognizant Technology Solutions Concierge Service API](https://apis.io/apis/cognizant-technology/cognizant-technology-conciergeservice-api/) — The service provides system-wide information about resources available in current instance of neuro-san.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-21
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-No public, self-serve REST APIs are documented at this time. Cognizant's developer footprint surfaces through the Neuro AI platform family (engagement-led) and the open-source Neuro SAN framework on GitHub.
+Model Context Protocol servers that expose the API to agents.
 
-## Common Properties
+- [Neuro SAN MCP service](https://apis.io/servers/cognizant-technology/neuro-san-mcp-service/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Cognizant Technology Neuro San Agent Service Overlay](https://apis.io/overlays/cognizant-technology/cognizant-technology-neuro-san-agent-service-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Cognizant Technology Authentication](https://apis.io/security/cognizant-technology/cognizant-technology-authentication/)
+- [Cognizant Technology Domain Security](https://apis.io/security/cognizant-technology/cognizant-technology-domain-security/)
+- [Cognizant Technology Vulnerability Disclosure](https://apis.io/security/cognizant-technology/cognizant-technology-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Cognizant Technology Plans Pricing](https://apis.io/plans/cognizant-technology/cognizant-technology-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Cognizant Technology Rate Limits](https://apis.io/rate-limits/cognizant-technology/cognizant-technology-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.cognizant.com/)
-- [AI Lab](https://www.cognizant.com/us/en/ai-lab)
-- [Platforms](https://www.cognizant.com/us/en/services/cognizant-platforms)
-- [Neuro AI Decisioning](https://www.cognizant.com/us/en/services/cognizant-platforms/neuro-generative-ai-adoption)
-- [Neuro AI Enterprise Core](https://www.cognizant.com/us/en/services/cognizant-platforms/neuro-ai-enterprise-core)
-- [Neuro AI Engineering](https://www.cognizant.com/us/en/services/cognizant-platforms/neuro-ai-engineering)
-- [Neuro AI for IT Operations](https://www.cognizant.com/us/en/services/cognizant-platforms/neuro-ai-it-operations)
-- [GitHub](https://github.com/cognizant-ai-lab)
-- [Neuro SAN Studio](https://github.com/cognizant-ai-lab/neuro-san-studio)
-- [News](https://news.cognizant.com/)
-- [Privacy Policy](https://www.cognizant.com/us/en/privacy-notice)
-- [Terms of Use](https://www.cognizant.com/us/en/terms-of-use)
+- [Documentation](https://github.com/cognizant-ai-lab/neuro-san/tree/main/docs)
+- [Getting started](https://github.com/cognizant-ai-lab/neuro-san/tree/main/quick-start)
+- [Support](https://github.com/cognizant-ai-lab/neuro-san/issues)
+- [Blog](https://www.cognizant.com/us/en/insights/insights-blog)
+- [Terms of service](https://www.cognizant.com/us/en/about-cognizant/terms-conditions)
+- [Privacy policy](https://www.cognizant.com/us/en/privacy-notice)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 39.7** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 72.5 |
+| Contract quality | 37.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 21.1 |
+
+**Agent readiness 24.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cognizant-technology/](https://apis.io/providers/cognizant-technology/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cognizant Technology Solutions: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cognizant-technology/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
