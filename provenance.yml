@@ -8,6 +8,12 @@ artifacts:
   authentication/cognizant-technology-authentication.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/cognizant-technology-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -53,6 +59,9 @@ artifacts:
   heartbeat/2026-11-06.yml:
     method: unknown
     evidence: no authorship recorded
+  heartbeat/2026-11-13.yml:
+    method: unknown
+    evidence: no authorship recorded
   hosts/cognizant-technology-hosts.yml:
     method: derived
     evidence: declared in the artifact
@@ -83,7 +92,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -149,6 +158,9 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/cognizant-technology-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -204,6 +216,9 @@ artifacts:
   press/2026-05-25-05-cognizant-and-openai-partner-to-reshape-enterprise.md:
     method: unknown
     evidence: no authorship recorded
+  privacy/cognizant-technology-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/cognizant-technology-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
